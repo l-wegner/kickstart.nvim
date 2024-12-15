@@ -167,6 +167,7 @@ end, { desc = 'Example to send commands to terminal' })
 vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Reload config' })
 vim.keymap.set('n', '<leader>x', ':.lua<CR>', { desc = 'Run lua code' })
 vim.keymap.set('v', '<leader>x', ':lua<CR>', { desc = 'Run lua code' })
+vim.keymap.set('n', '<leader>lg', '<cmd>LazyGit<CR>', { desc = 'Open LazyGit' })
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
@@ -834,6 +835,24 @@ require('lazy').setup({
       }
     end,
   },
+
+  -- Git
+  {
+    'lewis6991/gitsigns.nvim',
+    dependencies = {
+      {
+        'sindrets/diffview.nvim',
+        config = true,
+      },
+    },
+  },
+  {
+    {
+      'kdheepak/lazygit.nvim',
+      cmd = 'LazyGit',
+    },
+  },
+
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
