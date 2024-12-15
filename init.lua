@@ -151,6 +151,22 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+local job_id = 0
+local small_term = function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd 'J'
+  vim.api.nvim_win_set_height(0, 10)
+
+  job_id = vim.bo.channel
+end
+vim.keymap.set('n', '<leader>tt', small_term, { desc = 'Open a small terminal' })
+vim.keymap.set('n', '<leader>te', function()
+  vim.fn.chansend(job_id, "echo 'Hello, World!'\n")
+end, { desc = 'Example to send commands to terminal' })
+vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<CR>', { desc = 'Reload config' })
+vim.keymap.set('n', '<leader>x', ':.lua<CR>', { desc = 'Run lua code' })
+vim.keymap.set('v', '<leader>x', ':lua<CR>', { desc = 'Run lua code' })
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
@@ -177,6 +193,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
+  end,
+})
+
+vim.api.nvim_create_autocmd('TermOpen', {
+  desc = 'Hide numbers in terminal mode',
+  group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
   end,
 })
 
