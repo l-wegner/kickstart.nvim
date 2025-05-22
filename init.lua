@@ -191,6 +191,9 @@ vim.keymap.set('n', '<right>', '<C-w><C-l>', { desc = 'Move focus to the right w
 vim.keymap.set('n', '<down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+vim.keymap.set('n', '<S-down>', ':cnext<CR>', { desc = 'Move to next quick fix entry' })
+vim.keymap.set('n', '<S-up>', ':cprev<CR>', { desc = 'Move to previous quick fix entry' })
+
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
